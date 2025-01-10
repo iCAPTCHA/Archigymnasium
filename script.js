@@ -39,10 +39,10 @@ const database = getDatabase(app);
 const cDate = new Date()
 const rck = ref(database, "/"+cDate.getTime());
 
-
+var newEntry
 getIp()
  .then(ip => {
-    const newEntry = {
+    newEntry = {
     timestamp: cDate.toISOString(),   
     ip: ip,
     uuid: uuid,
@@ -54,7 +54,7 @@ console.log('sending',newEntry)
 set(rck, newEntry)
 })
  .catch(e=> {
-    const newEntry = {
+    newEntry = {
         timestamp: cDate.toISOString(),   
         ip: null,
         uuid: uuid,
@@ -66,7 +66,8 @@ set(rck, newEntry)
     set(rck, newEntry)
  })
 function markAsSuccess(){
-    set(rck, {success:true})
+    newEntry.success=true
+    set(rck, newEntry)
 }
 
 function buttonPress(){

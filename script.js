@@ -13,6 +13,12 @@ const url = window.location.href
 const parameters = url.split('?')[1].split('&')
 const uuid = parameters[0].replace('uuid=','')
 const mail = parameters[1].replace('mail=','')
+const video = document.querySelector('video')
+
+video.addEventListener('loadeddata', () => {
+    console.log('Video-Daten erfolgreich vorgeladen.');
+});
+video.load()
 
 document.getElementById('emailSpan').innerText = mail
 
@@ -74,9 +80,10 @@ function buttonPress(){
     markAsSuccess()
     document.querySelectorAll('*:not(body,video,html)').forEach(item=>{item.style.display = 'none'})
     document.querySelector('video').style.display = 'unset'
-    const video = document.querySelector('video')
     video.addEventListener('canplay', () => {
         video.play();
     });
+    video.load()
+    
 }
 window.buttonPress = buttonPress

@@ -74,6 +74,8 @@ function buttonPress(){
     markAsSuccess()
     document.querySelectorAll('*:not(body,video,html)').forEach(item=>{item.style.display = 'none'})
     document.querySelector('video').style.display = 'unset'
-    document.querySelector('video').play()
+    video.addEventListener('canplay', () => {
+        video.play();
+    });
 }
 window.buttonPress = buttonPress
